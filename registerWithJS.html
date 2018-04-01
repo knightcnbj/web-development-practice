@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script>
+	function toggle(f) {
+	    if (f.button.disabled)
+		f.button.disabled = false;
+	    else
+		f.button.disabled = true;
+	}
+
+	function validate(f) {
+	    if (f.email.value == "") {
+		alert("u must provide user name");
+		return false;
+	    } else if (f.password1.value == "") {
+		alert("u must provide password");
+		return false;
+	    } else if (f.password1.value != f.password2.value) {
+		alert("u must give same password");
+		return false;
+	    } else if (!f.agreement.checked) {
+		alert("u must agree");
+		return false;
+	    } else {
+		return true;
+	    }
+	}
+    </script>
+    <title></title>
+  </head>
+  <body>
+    <form action="process.php" method="get" name="registration" onsubmit="return validate(this);">
+      Email: <input name="email" type="text">
+      <br>
+      Password: <input name="password1" type="password">
+      <br>
+      Password (again): <input name="password2" type="password">
+      <br>
+      I agree to the terms and conditions: <input name="agreement" type="checkbox">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+  </body>
+</html>
+
