@@ -14,7 +14,7 @@
 
 	<body>
 		<ul>
-			<?
+			<?php
 				while ($row = mysql_fetch_array($result)) {
 					print("<li>");
 					print(htmlspecialchars($row["name"]));
