@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script>
+			var xhr = null;
+			//alert("hello world");
+			function quote() {
+				try {
+					xhr = new XMLHttpRequest();
+				} catch (e) {
+					xhr = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+
+				if (xhr == null) {
+					alert("ajax not support by your broswer!");
+				}
+
+				var url = "quote.php?symbol=" + document.getElementById("symbol").value;
+
+				document.getElementById("progress").style.display = "block";
+
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState == 4) {
+						if (xhr.status == 200) {
+							var quote = eval("(" + xhr.responseText + ")");
+							document.getElementById("code").value = xhr.responseText;
+
+							var div = document.createElement("div");
+							var text = document.createTextNode(symbol + ": " + quote.price);
+							div.appendChild(text);
+							document.getElementById("quotes").appendChild(div);
+						} else {
+							alert("error with ajax");
+						}
+					}
+				}
+				xhr.open("GET", url, true);
+				xhr.send(null);
+			}
+
+			
+		</script>
+		<title></title>
+	</head>
+
+	<body>
+		<form onsubmit="quote(); return false;">
+			Symbol: <input id="symbol" type="text">
+			<br><br>
+			<br><br>
+			<input type="submit" value="Get Quote">
+		</form>
+		<br>
+		<div id="quotes"></div>
+		<br>
+		<textarea cols="80" id="code" rows="16"></textarea>
+	</body>
+</html>
